@@ -1,11 +1,5 @@
 # PHP学习练手用
 
-**目录 (Table of Contents)**
-
-[TOCM]
-
-[TOC]
-
 ## 必要的软件
 1. ZendFramework-1.12.11
 1. httpd-2.4.25-x64-vc11-r1
