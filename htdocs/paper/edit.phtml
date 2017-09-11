@@ -1,0 +1,52 @@
+<el-row>
+  	<el-col :span="6" style="padding-right:5px;">
+  		<div class="grid-content">
+  			<canvas id="myCanvas"  style="height:710px; width:100%;">your browser does not support the canvas tag </canvas>
+  			<img id="mona" style="display:none;" src="./img/lapp.gif" height="710">
+  		</div>
+	</el-col>
+	<el-col :span="18">
+  		<div class="grid-content" style="padding-top:5px;">
+  			<el-form ref="form" :model="form" label-width="80px" v-show="ok">
+  				<el-form-item label="调整">
+	  				<el-radio class="radio" v-model="form.radio" label="1">拖拽调整</el-radio>
+	  				<el-radio class="radio" v-model="form.radio" label="2">微调</el-radio>
+	  			</el-form-item>
+				<el-form-item label="Point-x">
+					<el-button type="primary" @click="delPositionX">-</el-button>
+					<el-input v-model="form.pointx" style="width:200px;"></el-input>
+					<el-button type="primary" @click="addPositionX">+</el-button>
+				</el-form-item>
+				<el-form-item label="Point-y">
+					<el-button type="primary" @click="delPositionY">-</el-button>
+					<el-input v-model="form.pointy" style="width:200px;"></el-input>
+					<el-button type="primary" @click="addPositionY">+</el-button>
+				</el-form-item>
+				<el-form-item label="Width">
+					<el-button type="primary" @click="delSizeX">-</el-button>
+					<el-input v-model="form.width" style="width:200px;"></el-input>
+					<el-button type="primary" @click="addSizeX">+</el-button>
+				</el-form-item>
+				<el-form-item label="Height">
+					<el-button type="primary" @click="delSizeY">-</el-button>
+					<el-input v-model="form.height" style="width:200px;"></el-input>
+					<el-button type="primary" @click="addSizeY">+</el-button>
+				</el-form-item>
+				<el-form-item label="标签">
+					<el-input v-model="form.biaoqian" style="width:200px;"></el-input>
+				</el-form-item>
+				<el-form-item label="説明">
+					<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 11}" placeholder="请输入内容" v-model="form.content" @input="update">	</el-input>
+  					<div v-html="compiledMarkdown"></div>
+				</el-form-item>
+				<el-form-item >
+					<el-button type="primary" @click="setRectangle" ref="setRectangle">Size/Position设定</el-button>
+					<el-button type="primary" @click="delRectangle" ref="delRectangle">削除</el-button>
+					<el-button type="primary" @click="saveRectangle" ref="saveRectangle">保存</el-button>
+				</el-form-item>
+				
+				
+  			</el-form>
+  		</div>
+  	</el-col>
+</el-row>

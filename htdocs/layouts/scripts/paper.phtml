@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<?php
+		header('Expires: -1');
+		header('Cache-Control:');
+		header('Pragma:');
+	?>
+	
+	<?php echo $this->render('list/listHeader.phtml');?>
+</head>
+<body style="height:100%;">
+	<div id="app" v-on:load="onLoad()">
+		<el-row>
+  			<el-col :span="24">
+  				<div>
+  					<?php echo $this->render('menu/listMenu.phtml');?>
+  				</div>
+  			</el-col>
+		</el-row>
+		
+		<el-row class="detailContent">
+  			<el-col :span="24">
+  				<div>
+  					<?php echo $this->content ?>
+  				</div>
+  			</el-col>
+		</el-row>
+		
+		<el-row>
+  			<el-col :span="24">
+  				<div>
+  					<?php echo $this->render('list/listFooter.phtml');?>
+  				</div>
+  			</el-col>
+		</el-row>
+	</div>
+	
+	<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/common/js/vue.min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/common/js/elementUI.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/common/js/paper-full.min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/common/js/axios.min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/common/js/underscore-min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/common/js/marked.js"></script>
+	
+	<?php echo $this->render("/share/" . $this->controller ."Js.phtml");?>
+</body>
+</html>

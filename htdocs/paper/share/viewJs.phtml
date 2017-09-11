@@ -1,0 +1,105 @@
+<script>
+	paper.install(window);
+	var hitOptions = {
+			segments: true,
+			stroke: true,
+			fill: true,
+			tolerance: 1
+		};
+	
+	var path, hitType;
+	var minHeight = 10;
+	var minWidth = 10;
+	var obj = {};
+
+	var vm = new Vue({
+		  el: '#app',
+		  data: {
+        		textarea : ""
+	    	}
+	});
+	
+	window.onload = function() {
+		var canvas = document.getElementById('myCanvas');
+		var ctx = canvas.getContext('2d');
+
+		paper.setup(canvas);
+
+		var raster = new paper.Raster("mona");
+		// Scale the raster by 50%
+		raster.scale(1);
+		raster.size = new paper.Size();
+
+		var tool = new paper.Tool();
+		tool.minDistance = 10;
+
+		var startPoint;
+		tool.onMouseDown = function(event) {
+			var hitResult = project.hitTest(event.point, hitOptions);
+			
+			if (!hitResult){
+				startPoint = event.point;
+				
+				return ;
+			}else{
+				path = hitResult.item;
+			}
+			
+			hitType = hitResult.type;
+		};
+
+		tool.onMouseMove = function(event) {
+			changeCursor(event);
+			project.activeLayer.selected = false;
+			
+			if (event.item){
+				event.item.selected = true;
+			}
+		};
+
+		<?php if (count($this->details) > 0): ?>
+			<?php foreach ($this->details as $detail): ?>
+				var rec = new Path.Rectangle({
+					point: [<?php echo $detail["pointx"]; ?>, <?php echo $detail["pointy"]; ?>],
+					size: [<?php echo $detail["sizex"]; ?>, <?php echo $detail["sizey"]; ?>],
+					strokeColor: 'red',
+					fillColor : new Color(1, 0, 0, 0.001)
+				});
+	
+				startPoint = null;
+				
+				rec.onClick = function(event) {
+					event.item = this;
+					event.item.selected = true;
+	
+					vm.$data.textarea = unescape(<?php echo "'" . $detail["content"] . "'"; ?>);
+				};
+
+				var x,y;
+
+				x = rec.bounds.x + rec.bounds.width + 15;
+				y = rec.bounds.y + rec.bounds.height/2 + 5;
+
+				var ptObj = new PointText(new Point(x, y));
+				ptObj.justification = 'center';
+				ptObj.fillColor     = 'red';
+				ptObj.content       = <?php echo $detail["biaoqian"]; ?>;
+
+				obj[rec._id] = ptObj;
+				
+				var group = new Group({
+				    children: [rec, ptObj],
+				});
+			<?php endforeach; ?>
+		<?php endif ?>
+	}
+	
+	function changeCursor(event) {
+		var hitPosition = project.hitTest(event.point, hitOptions);
+		if(hitPosition == null ) {
+			document.body.style.cursor = "auto";
+		} else {
+			document.body.style.cursor = "all-scroll";
+		}
+	};
+</script>

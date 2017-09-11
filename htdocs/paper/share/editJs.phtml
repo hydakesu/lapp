@@ -1,0 +1,361 @@
+<script>
+	paper.install(window);
+	var hitOptions = {
+			segments: true,
+			stroke: true,
+			fill: true,
+			tolerance: 1
+		};
+	
+	var path, hitType;
+	var minHeight = 10;
+	var minWidth = 10;
+	var obj = {};
+
+	var vm = new Vue({
+		  el: '#app',
+		  data: {
+        		ok  : false,
+        		set : false,
+        		del : false,
+        		save: false,
+        		form : {
+        			pointx : "",
+        			pointy : "",
+        			width : "",
+        			height : "",
+        			content:"# hello",
+        			biaoqian:"",
+        			radio:"2",
+        			id:"",
+        			sequenceId:"",
+        			uuid:"lapp",
+            	}
+	    	},
+		    methods: {
+		    	setRectangle: function() {
+		    		this.$refs.setRectangle.disabled = true;
+		    		path.bounds.width  = parseInt(this.$data.form.width);
+		    		path.bounds.height = parseInt(this.$data.form.height);
+		    		path.bounds.x      = parseInt(this.$data.form.pointx);
+		    		path.bounds.y      = parseInt(this.$data.form.pointy);
+
+		    		if(obj[this.$data.form.id].obj){
+		    			reseizeText();
+			    	}else{
+			    		addText(this.$data.form.biaoqian);
+					}
+
+		    		obj[path._id]["biaoqian"] =  this.$data.form.biaoqian;
+					obj[path._id]["content"]  =  this.$data.form.content;
+					
+		    		this.$refs.setRectangle.disabled = false;
+		        },
+		        delRectangle:function() {
+		        	this.$refs.delRectangle.disabled = true;
+		        	
+		            path.remove();
+		            if(obj[path._id].obj){
+		            	obj[path._id].obj.remove();
+				    }
+		            
+		            vm.$data.form.biaoqian = "";
+		            vm.$data.ok = false;
+
+		            var params = new URLSearchParams();
+					params.append('uuid', 'lapp');
+					params.append('sequenceId', this.$data.form.sequenceId + "");
+					params.append('pointx', path.bounds.x);
+					params.append('pointy', path.bounds.y);
+					params.append('sizex', path.bounds.width);
+					params.append('sizey', path.bounds.height);
+					params.append('biaoqian', this.$data.form.biaoqian);
+					params.append('content', escape(this.$data.form.content));
+					params.append('flg', "del");
+					
+ 		        	axios.post('./edit/save', params
+ 		 		     ).then(function (response) {
+						vm.$notify({
+				          	title: '成功',
+				          	message: '保存成功',
+				          	type: 'success'
+				        });
+						vm.$refs.delRectangle.disabled = false;
+					}).catch(function (e) {
+						vm.$notify.error({
+				          	title: '错误',
+				          	message: '保存失败。\r\n' + e.message
+				        });
+						vm.$refs.delRectangle.disabled = false;
+					});
+		        },
+		        saveRectangle:function() {
+		        	this.$refs.saveRectangle.disabled = true;
+		        	
+		        	var params = new URLSearchParams();
+					params.append('uuid', 'lapp');
+					params.append('sequenceId', this.$data.form.sequenceId + "");
+					params.append('pointx', path.bounds.x);
+					params.append('pointy', path.bounds.y);
+					params.append('sizex', path.bounds.width);
+					params.append('sizey', path.bounds.height);
+					params.append('biaoqian', this.$data.form.biaoqian);
+					params.append('content', escape(this.$data.form.content));
+					params.append('flg', obj[path._id].flg);
+
+ 		        	axios.post('./edit/save', params
+ 		 		     ).then(function (response) {
+						vm.$notify({
+				          	title: '成功',
+				          	message: '保存成功',
+				          	type: 'success'
+				        });
+						vm.$refs.saveRectangle.disabled = false;
+					}).catch(function (e) {
+						vm.$notify.error({
+				          	title: '错误',
+				          	message: '保存失败。\r\n' + e.message
+				        });
+						vm.$refs.saveRectangle.disabled = false;
+					});
+		        },
+		        addPositionX: function() {
+		        	this.$data.form.pointx += 1;
+		            path.bounds.x = this.$data.form.pointx;
+		            reseizeText();
+		        },
+		        delPositionX: function() {
+		        	this.$data.form.pointx -= 1;
+		            path.bounds.x = this.$data.form.pointx;
+		            reseizeText();
+		        },
+		        addPositionY: function() {
+		        	this.$data.form.pointy += 1;
+		            path.bounds.y = this.$data.form.pointy;
+		            reseizeText();
+		        },
+		        delPositionY: function() {
+		        	this.$data.form.pointy -= 1;
+		            path.bounds.y = this.$data.form.pointy;
+		            reseizeText();
+		        },
+		        addSizeX: function() {
+		        	this.$data.form.width += 1;
+		        	path.bounds.width  = this.$data.form.width;
+		        	reseizeText();
+		        },
+		        delSizeX: function() {
+		        	this.$data.form.width -= 1;
+		        	path.bounds.width  = this.$data.form.width;
+		        	reseizeText();
+		        },
+		        delSizeY: function() {
+		        	this.$data.form.height -= 1;
+		        	path.bounds.height = this.$data.form.height;
+		        	reseizeText();
+		        },
+		        addSizeY: function() {
+		        	this.$data.form.height += 1;
+		        	path.bounds.height = this.$data.form.height;
+		        	reseizeText();
+		        },
+		        update: _.debounce(function (e) {
+		        	this.$data.form.content = e.target.value
+		          	}, 
+		        300)
+		    },
+		    computed: {
+		        compiledMarkdown: function () {
+		        	return marked(this.$data.form.content, { sanitize: true })
+		        }
+		    }
+	});
+
+	window.onload = function() {
+		var canvas = document.getElementById('myCanvas');
+		var ctx = canvas.getContext('2d');
+
+		paper.setup(canvas);
+
+		var raster = new paper.Raster("mona");
+		// Scale the raster by 50%
+		raster.scale(1);
+		raster.size = new paper.Size();
+
+		var tool = new paper.Tool();
+		tool.minDistance = 10;
+
+		var startPoint;
+		tool.onMouseDown = function(event) {
+			var hitResult = project.hitTest(event.point, hitOptions);
+			
+			if (!hitResult){
+				startPoint = event.point;
+				
+				return ;
+			}else{
+				path = hitResult.item;
+			}
+			
+			hitType = hitResult.type;
+		};
+
+		tool.onMouseDrag = function(event) {
+			if(path && vm.$data.form.radio == "1"){
+				if (hitType == "stroke" || hitType == "segment") {
+					path = null;
+				} else if(hitType == "fill"){
+					path.position = event.point;
+					reseizeText();
+				}else {
+					path.position += event.delta;
+					path = null;
+				}
+			}
+		};
+
+		tool.onMouseUp = function(event) {
+			if(startPoint != null){
+				minHeight = event.point.y - startPoint.y;
+				minWidth  = event.point.x - startPoint.x;
+				
+				var rec = new Path.Rectangle({
+					point: [startPoint.x, startPoint.y],
+					size: [minWidth, minHeight],
+					strokeColor: 'red',
+					fillColor : new Color(1, 0, 0, 0.001)
+				});
+
+				startPoint = null;
+				var subObj = {
+						"flg":"add"
+						};
+				obj[rec._id]  = subObj;
+				
+				rec.onClick = function(event) {
+					event.item = this;
+					event.item.selected = true;
+
+					vm.$data.ok = true;
+					vm.$data.form.pointx =  path.bounds.x;
+					vm.$data.form.pointy =  path.bounds.y;
+					vm.$data.form.width  =  path.bounds.width;
+					vm.$data.form.height =  path.bounds.height;
+					vm.$data.form.biaoqian   = obj[path._id]["biaoqian"];
+					vm.$data.form.id         = this.id;
+					vm.$data.form.sequenceId = (new Date()).getTime();
+					vm.$data.form.content   = obj[path._id]["content"];
+				};
+			}
+		};
+
+		tool.onMouseMove = function(event) {
+			changeCursor(event);
+			project.activeLayer.selected = false;
+			
+			if (event.item){
+				event.item.selected = true;
+			}
+		};
+
+		<?php if (count($this->details) > 0): ?>
+			<?php foreach ($this->details as $detail): ?>
+				var rec = new Path.Rectangle({
+					point: [<?php echo $detail["pointx"]; ?>, <?php echo $detail["pointy"]; ?>],
+					size: [<?php echo $detail["sizex"]; ?>, <?php echo $detail["sizey"]; ?>],
+					strokeColor: 'red',
+					fillColor : new Color(1, 0, 0, 0.001)
+				});
+	
+				startPoint = null;
+				
+				rec.onClick = function(event) {
+					event.item = this;
+					event.item.selected = true;
+	
+					vm.$data.ok = true;
+					vm.$data.form.pointx =  path.bounds.x;
+					vm.$data.form.pointy =  path.bounds.y;
+					vm.$data.form.width  =  path.bounds.width;
+					vm.$data.form.height =  path.bounds.height;
+					vm.$data.form.biaoqian   = <?php echo $detail["biaoqian"]; ?>;
+					vm.$data.form.id         = this.id;
+					vm.$data.form.sequenceId = <?php echo $detail["sequenceid"]; ?>;
+					vm.$data.form.content    = unescape(<?php echo "'" . $detail["content"] . "'"; ?>);
+					vm.$data.form.uuid       = <?php echo "'" . $detail["uuid"] . "'"; ?>;
+					
+					if(obj[path._id]){
+						vm.$data.form.biaoqian = obj[path._id].obj._content;
+				    }
+				};
+
+				var x,y;
+
+				x = rec.bounds.x + rec.bounds.width + 15;
+				y = rec.bounds.y + rec.bounds.height/2 + 5;
+
+				var ptObj = new PointText(new Point(x, y));
+				ptObj.justification = 'center';
+				ptObj.fillColor     = 'red';
+				ptObj.content       = <?php echo $detail["biaoqian"]; ?>;
+
+				var subObj = {
+						"flg":"edit",
+						"obj":ptObj,
+						"uuid":<?php echo "'" . $detail["uuid"] . "'"; ?>,
+						"sequenceid":<?php echo $detail["sequenceid"]; ?>,
+						"biaoqian":<?php echo $detail["biaoqian"]; ?>,
+						"content":unescape(<?php echo "'" . $detail["content"] . "'"; ?>)
+						};
+				obj[rec._id]  = subObj;
+				
+				var group = new Group({
+				    children: [rec, ptObj],
+				});
+			<?php endforeach; ?>
+		<?php endif ?>
+	}
+
+	function addText(content){
+
+		if(content == ""){
+			return;
+		}
+		
+		var x,y;
+
+		x = path.bounds.x + path.bounds.width + 15;
+		y = path.bounds.y + path.bounds.height/2 + 5;
+
+		var ptObj = new PointText(new Point(x, y));
+		ptObj.justification = 'center';
+		ptObj.fillColor     = 'red';
+		ptObj.content       = content;
+
+		var subObj = obj[path._id];
+		subObj["obj"] = ptObj;
+		obj[path._id] = subObj;
+		
+		var group = new Group({
+		    children: [path, ptObj],
+		});
+	};
+
+	function reseizeText(){
+		var ptObj = obj[vm.$data.form.id].obj;
+
+		ptObj.bounds.x = path.bounds.x + path.bounds.width + ptObj.bounds.width/2;
+		ptObj.bounds.y = path.bounds.y + path.bounds.height/2 - ptObj.bounds.height/2;
+
+		ptObj.setContent(vm.$data.form.biaoqian);
+	};
+	
+	function changeCursor(event) {
+		var hitPosition = project.hitTest(event.point, hitOptions);
+		if(hitPosition == null ) {
+			document.body.style.cursor = "auto";
+		} else {
+			document.body.style.cursor = "all-scroll";
+		}
+	};
+</script>

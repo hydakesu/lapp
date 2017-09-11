@@ -1,0 +1,66 @@
+2017-07-24T14:59:26+09:00 ERR (3): script 'list.html' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/demoList/)
+2017-07-24T15:00:21+09:00 ERR (3): script 'list.html' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/demoList/)
+2017-07-24T15:01:17+09:00 ERR (3): script 'layouts/list/listHeader.phtml' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts/)
+2017-07-24T15:02:33+09:00 ERR (3): script 'list/listHeader.phtml' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts/)
+2017-07-24T15:10:23+09:00 ERR (3): script 'listlayout.html' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\demo\htdocs/demo/)
+2017-07-24T16:25:23+09:00 ERR (3): script 'list.html' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\demo\htdocs/demo/)
+2017-07-24T16:25:24+09:00 ERR (3): script 'list.html' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\demo\htdocs/demo/)
+2017-07-24T16:25:25+09:00 ERR (3): script 'list.html' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\demo\htdocs/demo/)
+2017-07-24T16:33:19+09:00 ERR (3): Setting private or protected class members is not allowed
+2017-07-24T16:33:20+09:00 ERR (3): Setting private or protected class members is not allowed
+2017-07-24T16:33:21+09:00 ERR (3): Setting private or protected class members is not allowed
+2017-07-24T16:44:34+09:00 ERR (3): script 'demo/share/listphtml' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\demo\htdocs/demo/)
+2017-07-24T16:44:48+09:00 ERR (3): script 'demo/share/list.phtml' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\demo\htdocs/demo/)
+2017-07-24T16:45:43+09:00 ERR (3): script 'demo/share/list.phtml' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\demo\htdocs/demo/)
+2017-07-24T16:46:39+09:00 ERR (3): script '/demo/share/list.phtml' not found in path (D:\LAPP\Apache24\htdocs\demo\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\demo\htdocs/demo/)
+2017-07-24T17:52:33+09:00 ERR (3): SQLSTATE[HY000]: General error, query was: 
+2017-07-24T17:54:13+09:00 ERR (3): SQLSTATE[HY000]: General error, query was: 
+2017-07-24T17:55:54+09:00 ERR (3): SQLSTATE[HY000]: General error, query was: 
+2017-07-27T12:06:40+09:00 ERR (3): SQLSTATE[08006] [7] could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (10.191.16.248) and accepting
+	TCP/IP connections on port 5432?
+could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5432?
+2017-07-28T11:14:36+09:00 ERR (3): script '/share/topJs.phtml' not found in path (D:\LAPP\Apache24\htdocs\caffe\htdocs/layouts\scripts/;D:\LAPP\Apache24\htdocs\caffe\htdocs/order/)
+2017-08-21T17:43:52+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:45:34+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:51:29+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:52:01+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:53:03+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:53:36+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:53:51+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:55:54+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:56:01+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T17:59:16+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "''"
+LINE 1: insert into sample ('','',,,,,'','' )
+                            ^, query was: insert into sample ('','',,,,,'','' )
+2017-08-21T18:03:27+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(48): SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "'lapp'"
+LINE 1: insert into sample ('lapp','1503306168555',212,337,118,64,'1...
+                            ^, query was: insert into sample ('lapp','1503306168555',212,337,118,64,'11','11' )
+2017-08-22T10:07:34+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(60): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "sample_pkey"
+DETAIL:  Key (uuid, sequenceid)=(lapp, 1503306456158) already exists., query was: insert into sample VALUES ('lapp','1503306456158',40,253,252,67,'22','33333333333333333' )
+2017-08-22T10:08:48+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(60): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "sample_pkey"
+DETAIL:  Key (uuid, sequenceid)=(lapp, 1503306456158) already exists., query was: insert into sample VALUES ('lapp','1503306456158',40,253,252,67,'22','224444444' )
+2017-08-22T10:09:45+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(60): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "sample_pkey"
+DETAIL:  Key (uuid, sequenceid)=(lapp, 1503306456158) already exists., query was: insert into sample VALUES ('lapp','1503306456158',40,253,252,67,'22','224444444' )
+2017-08-22T10:11:55+09:00 ERR (3): D:\LAPP\Apache24\htdocs\caffe\application\modules\paper\controllers\EditController.php(60): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "sample_pkey"
+DETAIL:  Key (uuid, sequenceid)=(lapp, 1503306456158) already exists., query was: insert into sample VALUES ('lapp','1503306456158',40,253,252,67,'22','22' )

@@ -1,0 +1,13 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<?php echo $this->render('detail/detailHeader.html');?>
+</head>
+<body style="height:100%;">
+	<?php echo $this->render('menu/detailMenu.html');?>
+	
+	<?php echo $this->layout()->content ?>
+	
+	<?php echo $this->render('detail/detailFooter.html');?>
+</body>
+</html>

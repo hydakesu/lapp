@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<?php
+		header('Expires: -1');
+		header('Cache-Control:');
+		header('Pragma:');
+	?>
+	
+	<?php echo $this->render('list/listHeader.phtml');?>
+</head>
+<body style="height:100%;">
+	<div id="app">
+		<?php echo $this->render('menu/listMenu.phtml');?>
+		
+		<?php echo $this->content ?>
+		
+		<?php echo $this->render('list/listFooter.phtml');?>
+	</div>
+	
+	<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/common/js/vue.min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/common/js/elementUI.js"></script>
+	
+	<?php echo $this->render("/share/" . $this->controller ."Js.phtml");?>
+</body>
+</html>
